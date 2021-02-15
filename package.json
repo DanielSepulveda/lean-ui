@@ -9,7 +9,8 @@
     "bootstrap": "lerna bootstrap --use-workspaces",
     "storybook": "start-storybook -p 6006",
     "coverage": "jest --coverage",
-    "unit": "jest"
+    "unit": "jest",
+    "postinstall": "lerna bootstrap"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.16",
