@@ -1,13 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import 'jest-styled-components';
-import Input from './Input';
 
-describe('Input', () => {
+import { Button } from '../src';
+
+describe('Button', () => {
   test('renders correctly', () => {
-    const tree = renderer
-      .create(<Input placeholder="user@gmail.com" />)
-      .toJSON();
+    const tree = renderer.create(<Button>{'Test'}</Button>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

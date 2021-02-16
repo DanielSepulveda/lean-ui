@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Input from './Input';
+import { Input } from '../src';
 
 export default {
   component: Input,
