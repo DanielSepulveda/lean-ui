@@ -1,8 +1,39 @@
 {
   "name": "input",
+  "description": "A React component that is a base input.",
   "version": "1.0.1",
-  "main": "lib/index.js",
-  "module": "src/index.js",
+  "homepage": "https://github.com/VitauMX/vita-ui#readme",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VitauMX/vita-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VitauMX/vita-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "concurrently yarn:build:*",
+    "build:esm": "cross-env BABEL_ENV=esm babel src --root-mode upward --extensions .ts,.tsx -d dist/esm --source-maps",
+    "build:cjs": "cross-env BABEL_ENV=cjs babel src --root-mode upward --extensions .ts,.tsx -d dist/cjs --source-maps",
+    "build:types": "tsc --declarationDir dist/types",
+    "test": "jest --passWithNoTests",
+    "test:cov": "yarn test --coverage",
+    "lint": "concurrently yarn:lint:*",
+    "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc",
+    "lint:types": "tsc --noEmit"
+  },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",

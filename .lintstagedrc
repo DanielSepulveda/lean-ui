@@ -1,7 +1,10 @@
 {
-  "*.{js,ts,tsx}": [
+  "**/*.{ts,tsx,js,jsx}": [
     "stylelint",
     "eslint",
     "prettier --write"
   ],
+  "**/package.json": [
+    "prettier-package-json --write"
+  ]
 }
