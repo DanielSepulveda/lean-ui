@@ -21,7 +21,7 @@
     "clean": "lerna clean --yes && rimraf node_modules",
     "postinstall": "yarn bootstrap && yarn check:pkgs"
   },
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.12.16",
     "@babel/core": "^7.12.16",
     "@babel/preset-env": "^7.12.16",
