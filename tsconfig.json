@@ -23,9 +23,15 @@
     // allows react jsx in tsx files
     "jsx": "react",
     // Can't assign null/undefined to types that do not handle them
-    "strictNullChecks": true,
-    "baseUrl": "./"
+    "strictNullChecks": true
   },
-  "include": ["packages"],
-  "exclude": ["node_modules"]
+  "include": ["packages", "scripts"],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+      "resolveJsonModule": true,
+      "noImplicitAny": false
+    }
+  }
 }

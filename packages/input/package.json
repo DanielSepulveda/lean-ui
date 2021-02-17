@@ -1,5 +1,5 @@
 {
-  "name": "input",
+  "name": "@lean-ui/input",
   "description": "A React component that is a base input.",
   "license": "MIT",
   "homepage": "https://github.com/VitauMX/vita-ui#readme",
