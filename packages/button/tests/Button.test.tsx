@@ -5,6 +5,6 @@ import { Button } from '../src';
 
 describe('Button', () => {
   test('renders correctly', () => {
-    render(<Button>{'Test'}</Button>);
+    render(<Button>{'Test 2'}</Button>);
   });
 });

@@ -1,25 +1,22 @@
 {
-  "name": "root",
   "private": true,
+  "name": "root",
   "workspaces": [
     "packages/*"
   ],
-  "nohoist": [
-    "husky"
-  ],
   "scripts": {
-    "check:pkgs": "manypkg check",
-    "fix:pkgs": "manypkg fix",
-    "build": "lerna run build --stream",
-    "prestart": "yarn && yarn bootstrap",
     "boot": "yarn prestart && yarn build",
     "bootstrap": "lerna bootstrap --use-workspaces",
+    "build": "lerna run build --stream",
+    "check:pkgs": "manypkg check",
+    "clean": "lerna clean --yes && rimraf node_modules",
+    "fix:pkgs": "manypkg fix",
+    "postinstall": "yarn bootstrap && yarn check:pkgs",
+    "lint": "lerna run lint --stream",
+    "prestart": "yarn && yarn bootstrap",
     "start": "yarn build && yarn storybook",
     "storybook": "start-storybook -p 6006",
-    "test": "jest --passWithNoTests",
-    "lint": "lerna run lint --stream",
-    "clean": "lerna clean --yes && rimraf node_modules",
-    "postinstall": "yarn bootstrap && yarn check:pkgs"
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {
     "@babel/cli": "^7.12.16",
@@ -73,5 +70,8 @@
     "stylelint-processor-styled-components": "^1.10.0",
     "ts-jest": "^26.5.1",
     "typescript": "^4.1.5"
-  }
+  },
+  "nohoist": [
+    "husky"
+  ]
 }
