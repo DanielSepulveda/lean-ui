@@ -16,7 +16,7 @@
     "bootstrap": "lerna bootstrap --use-workspaces",
     "start": "yarn build && yarn storybook",
     "storybook": "start-storybook -p 6006",
-    "test": "lerna run test --stream",
+    "test": "jest --passWithNoTests",
     "lint": "lerna run lint --stream",
     "clean": "lerna clean --yes && rimraf node_modules",
     "postinstall": "yarn bootstrap && yarn check:pkgs"
