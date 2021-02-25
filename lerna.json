@@ -3,15 +3,17 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "version": "independent",
+  "ignoreChanges": ["**/stories/**", "**/tests/**"],
   "command": {
     "publish": {
-      "conventionalCommits": true,
       "registry": "https://registry.npmjs.org/"
     },
     "version": {
+      "conventionalCommits": true,
       "allowBranch": "main",
       "message": "chore(release): publish",
-      "ignoreChanges": ["**/stories/**", "**/tests/**"]
+      "noChangelog": true,
+      "noPush": true
     }
   },
   "changelog": {
