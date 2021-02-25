@@ -1,7 +1,8 @@
+import * as React from 'react';
 import styled from 'styled-components';
 
-export const Button = styled.button`
-  background: red;
+const StyledButton = styled.button`
+  background: tomato;
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
@@ -9,3 +10,12 @@ export const Button = styled.button`
   font-weight: 300;
   padding: 9px 36px;
 `;
+
+export interface IButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  isLoading?: boolean;
+}
+
+export const Button: React.FC<IButtonProps> = (props) => {
+  return <StyledButton {...props} />;
+};
