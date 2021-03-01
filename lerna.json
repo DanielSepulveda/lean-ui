@@ -10,7 +10,7 @@
     },
     "version": {
       "conventionalCommits": true,
-      "allowBranch": "main",
+      "allowBranch": "release/*",
       "message": "chore(release): publish",
       "noChangelog": true,
       "noPush": true
