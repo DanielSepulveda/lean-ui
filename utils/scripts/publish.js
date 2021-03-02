@@ -6,46 +6,12 @@ const clear = require('clear');
 const figlet = require('figlet');
 const ora = require('ora');
 const execa = require('execa');
-const globToRegExp = require('glob-to-regexp');
+
+const { assertGitBranch, displayError } = require('./common');
 
 const spinner = ora();
 
-const ALLOWED_RELEASE_BRANCHES = ['main'];
-
-const displayError = (error) => {
-  const message = chalk.red(error);
-
-  spinner.fail(message);
-};
-
-const getCurrentGitBranch = async () => {
-  let currentBranch = '';
-
-  try {
-    const output = await execa('git', ['branch', '--show-current']);
-    currentBranch = output.stdout.toString();
-  } catch (error) {
-    throw new Error('Git branch not found');
-  }
-
-  return currentBranch;
-};
-
-const assertGitBranch = async () => {
-  spinner.start(`Asserting current git branch to be an allowed release branch`);
-
-  const currentBranch = await getCurrentGitBranch();
-  const isInAllowedBranch = ALLOWED_RELEASE_BRANCHES.some((branch) => {
-    const re = globToRegExp(branch);
-    return re.test(currentBranch);
-  });
-
-  if (isInAllowedBranch) {
-    spinner.succeed();
-  } else {
-    throw new Error(`Switch to a valid release branch`);
-  }
-};
+const ALLOWED_PUBLISH_BRANCHES = ['main'];
 
 const publishToNpm = async () => {
   spinner.start('Publishing to NPM');
@@ -108,12 +74,12 @@ const run = async () => {
   // Display intro message banner
   console.log(chalk.blue(figlet.textSync('publish')));
   try {
-    await assertGitBranch();
+    await assertGitBranch(ALLOWED_PUBLISH_BRANCHES, spinner);
     await publishToNpm();
     await tagRelease();
     spinner.succeed('Success\n✨');
   } catch (error) {
-    displayError(error.message);
+    displayError(error.message, spinner);
   }
 };
 
