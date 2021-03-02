@@ -60,8 +60,6 @@ const publishToNpm = async () => {
     throw new Error('Error setting NPM auth token');
   }
 
-  spinner.info();
-
   try {
     const publishArgs = [
       'lerna',
