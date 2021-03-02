@@ -48,7 +48,8 @@ const versionPackages = async () => {
     'version',
     '--conventional-commits', // version packages by conventional commits
     '--no-changelog', // don`t generate changelog
-    '--allow-branch main',
+    '--allow-branch',
+    'main',
     '--yes', // answer yes to all
   ];
 
