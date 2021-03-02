@@ -7,7 +7,7 @@ const chalk = require('chalk');
  * @param {String} error
  * @param {Spinner} spinner
  */
-export const displayError = (error, spinner) => {
+const displayError = (error, spinner) => {
   const message = chalk.red(error);
 
   spinner.fail(message);
@@ -16,7 +16,7 @@ export const displayError = (error, spinner) => {
 /**
  * Retunrs the current git branch
  */
-export const getCurrentGitBranch = async () => {
+const getCurrentGitBranch = async () => {
   let currentBranch = '';
 
   try {
@@ -34,7 +34,7 @@ export const getCurrentGitBranch = async () => {
  * @param {String[]} allowedBranches
  * @param {Spinner} spinner
  */
-export const assertGitBranch = async (allowedBranches, spinner) => {
+const assertGitBranch = async (allowedBranches, spinner) => {
   spinner.start(`Asserting current git branch to be an allowed release branch`);
 
   const currentBranch = await getCurrentGitBranch();
@@ -48,4 +48,10 @@ export const assertGitBranch = async (allowedBranches, spinner) => {
   } else {
     throw new Error(`Switch to a valid release branch`);
   }
+};
+
+module.exports = {
+  displayError,
+  assertGitBranch,
+  getCurrentGitBranch,
 };
