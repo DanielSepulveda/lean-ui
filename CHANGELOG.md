@@ -14,6 +14,18 @@
 ## Release (2021-03-02)
 
 #### :bug: Bug Fix
+* `button`
+  * [#18](https://github.com/DanielSepulveda/lean-ui/pull/18) fix(button): update button color ([@DanielSepulveda](https://github.com/DanielSepulveda))
+
+#### :house: Internal
+* [#19](https://github.com/DanielSepulveda/lean-ui/pull/19) chore(scripts): update publishing script to tag through lerna ([@DanielSepulveda](https://github.com/DanielSepulveda))
+
+#### Committers: 1
+- Daniel Sepulveda ([@DanielSepulveda](https://github.com/DanielSepulveda))
+
+## Release (2021-03-02)
+
+#### :bug: Bug Fix
 
 - `input`
   - [#15](https://github.com/DanielSepulveda/lean-ui/pull/15) fix(input): update input color ([@DanielSepulveda](https://github.com/DanielSepulveda))
