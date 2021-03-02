@@ -30,7 +30,7 @@ const publishToNpm = async () => {
     const publishArgs = [
       'lerna',
       'publish',
-      'from-package',
+      'from-git',
       '--no-verify-access',
       '--yes',
     ];
