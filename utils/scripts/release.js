@@ -1,16 +1,24 @@
 #!/usr/bin/env node
 
+require('dotenv').config();
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
 const ora = require('ora');
 const execa = require('execa');
 const globToRegExp = require('glob-to-regexp');
+const util = require('util');
+const fs = require('fs');
+const temp = require('temp').track();
+const resolve = require('path').resolve;
+const { Changelog } = require('lerna-changelog');
+const { fromPath } = require('lerna-changelog/lib/configuration');
 const lernaConfig = require('../../lerna.json');
 
 const spinner = ora();
 
 const ALLOWED_RELEASE_BRANCHES = ['release/*'];
+const INSERTION_SLUG = '<!-- insert-new-changelog-here -->';
 
 const displayError = (error) => {
   const message = chalk.red(error);
@@ -82,10 +90,55 @@ const versionPackages = async () => {
 
   spinner.start('Commit version changes');
 
-  const commitArgs = ['commit', '-m', lernaConfig.version.message];
+  await execa('git', ['add', '.']);
+  const commitArgs = ['commit', '-m', lernaConfig.command.version.message];
   await execa('git', commitArgs);
 
   spinner.succeed();
+};
+
+const generateChangelog = async () => {
+  // let retVal;
+
+  spinner.start('Generating changelog');
+
+  const write = util.promisify(fs.write);
+  const open = util.promisify(temp.open);
+  const { path, fd } = await open({ prefix: 'CHANGELOG', suffix: '.md' });
+
+  const rootPath = await execa('git', ['rev-parse', '--show-toplevel']);
+  const changelogConfig = fromPath(rootPath.stdout);
+  const markdown = await new Changelog(changelogConfig).createMarkdown();
+
+  await write(fd, markdown);
+
+  const readFile = util.promisify(fs.readFile);
+  const changelogPath = resolve(__dirname, '..', '..', 'CHANGELOG.md');
+  const data = await readFile(changelogPath, 'utf8');
+
+  if (data.includes(INSERTION_SLUG)) {
+    const retVal = await readFile(path, 'utf8');
+
+    const writeFile = util.promisify(fs.writeFile);
+    const changes = data.replace(
+      INSERTION_SLUG,
+      `${INSERTION_SLUG}\n${retVal}`
+    );
+
+    await writeFile(changelogPath, changes);
+    await execa('git', [
+      'commit',
+      '-m',
+      `chore(changelog): generate changelog`,
+      '--no-verify',
+      '--quiet',
+      changelogPath,
+    ]);
+
+    spinner.succeed();
+  } else {
+    throw new Error(`Missing "${INSERTION_SLUG}" in CHANGELOG.md`);
+  }
 };
 
 const run = async () => {
@@ -94,50 +147,14 @@ const run = async () => {
   console.log(chalk.blue(figlet.textSync('release')));
   try {
     await assertGitBranch();
-    const tag = await versionPackages();
-    console.log(tag);
+    await versionPackages();
+    await generateChangelog();
+    spinner.succeed(
+      'Success\n✨ Push this branch and create a new pull request.'
+    );
   } catch (error) {
     displayError(error.message);
   }
 };
 
 run();
-
-// const program = new Command();
-// program.version('0.0.1');
-// program.description(
-//   'Tag, generate changelog, and publish new versions for vita-ui components'
-// );
-
-// program
-//   .description("An example CLI for ordering pizza's")
-//   .option('-p, --peppers', 'Add peppers')
-//   .option('-P, --pineapple', 'Add pineapple')
-//   .option('-b, --bbq', 'Add bbq sauce')
-//   .option('-c, --cheese <type>', 'Add the specified type of cheese [marble]')
-//   .option('-C, --no-cheese', 'You do not want any cheese')
-//   .parse(process.argv);
-
-// console.log('you ordered a pizza with:');
-
-// console.log(program.opts());
-
-// if (program.peppers) console.log('  - peppers');
-// if (program.pineapple) console.log('  - pineapple');
-// if (program.bbq) console.log('  - bbq');
-// const cheese = true === program.cheese ? 'marble' : program.cheese || 'no';
-// console.log('  - %s cheese', cheese);
-
-// program
-//   .version('0.1.0')
-//   .arguments('<username> [password]')
-//   .description('test command', {
-//     username: 'user to login',
-//     password: 'password for user, if required',
-//   })
-//   .action((username, password) => {
-//     console.log('username:', username);
-//     console.log('environment:', password || 'no password given');
-//   });
-
-// program.parse();
