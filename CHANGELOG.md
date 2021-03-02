@@ -15,6 +15,18 @@
 
 #### :bug: Bug Fix
 * `button`
+  * [#29](https://github.com/DanielSepulveda/lean-ui/pull/29) fix(button): update button color ([@DanielSepulveda](https://github.com/DanielSepulveda))
+
+#### :house: Internal
+* [#28](https://github.com/DanielSepulveda/lean-ui/pull/28) fix(scripts): update publishing script ([@DanielSepulveda](https://github.com/DanielSepulveda))
+
+#### Committers: 1
+- Daniel Sepulveda ([@DanielSepulveda](https://github.com/DanielSepulveda))
+
+## Release (2021-03-02)
+
+#### :bug: Bug Fix
+* `button`
   * [#26](https://github.com/DanielSepulveda/lean-ui/pull/26) fix(button): update button color ([@DanielSepulveda](https://github.com/DanielSepulveda))
 
 #### :house: Internal
