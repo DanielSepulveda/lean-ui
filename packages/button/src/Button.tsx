@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  background: blueviolet;
+  background: tomato;
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
