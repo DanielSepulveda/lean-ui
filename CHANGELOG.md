@@ -11,17 +11,20 @@
 <!-- DO NOT MODIFY BELOW THIS COMMENT -->
 <!-- insert-new-changelog-here -->
 
-## Unreleased (2021-03-02)
+## Release (2021-03-02)
 
 #### :bug: Bug Fix
-* `input`
-  * [#15](https://github.com/DanielSepulveda/lean-ui/pull/15) fix(input): update input color ([@DanielSepulveda](https://github.com/DanielSepulveda))
+
+- `input`
+  - [#15](https://github.com/DanielSepulveda/lean-ui/pull/15) fix(input): update input color ([@DanielSepulveda](https://github.com/DanielSepulveda))
 
 #### :house: Internal
-* [#16](https://github.com/DanielSepulveda/lean-ui/pull/16) fix(scripts): fix module exports ([@DanielSepulveda](https://github.com/DanielSepulveda))
-* [#14](https://github.com/DanielSepulveda/lean-ui/pull/14) chore(scripts): Refactor release and publish scripts ([@DanielSepulveda](https://github.com/DanielSepulveda))
+
+- [#16](https://github.com/DanielSepulveda/lean-ui/pull/16) fix(scripts): fix module exports ([@DanielSepulveda](https://github.com/DanielSepulveda))
+- [#14](https://github.com/DanielSepulveda/lean-ui/pull/14) chore(scripts): Refactor release and publish scripts ([@DanielSepulveda](https://github.com/DanielSepulveda))
 
 #### Committers: 1
+
 - Daniel Sepulveda ([@DanielSepulveda](https://github.com/DanielSepulveda))
 
 ## Release (2021-03-02)
