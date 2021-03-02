@@ -14,24 +14,12 @@ const { Changelog } = require('lerna-changelog');
 const { fromPath } = require('lerna-changelog/lib/configuration');
 
 const { displayError, assertGitBranch } = require('./common');
-const lernaConfig = require('../../lerna.json');
-
 const spinner = ora();
 
 const ALLOWED_RELEASE_BRANCHES = ['release/*'];
 const INSERTION_SLUG = '<!-- insert-new-changelog-here -->';
 
-const versionPackages = async () => {
-  const lernaArgs = [
-    'lerna',
-    'version',
-    '--conventional-commits', // version packages by conventional commits
-    '--no-changelog', // don`t generate changelog
-    '--no-push', // don`t push changes
-    '--no-git-tag-version', // don`t commit changes and don`t tag the commit
-    '--yes', // answer yes to all
-  ];
-
+const printCommits = async () => {
   spinner.start('Commits since current version:');
 
   const describeArgs = ['describe', '--abbrev=0', '--tags'];
@@ -48,19 +36,6 @@ const versionPackages = async () => {
   spinner.info();
   // Print commits since last release tag
   await execa('git', logArgs, { stdout: process.stdout });
-  // Lerna version packages
-  await execa('yarn', lernaArgs, {
-    stdin: process.stdin,
-    stdout: process.stdout,
-  });
-
-  spinner.start('Commit version changes');
-
-  await execa('git', ['add', '.']);
-  const commitArgs = ['commit', '-m', lernaConfig.command.version.message];
-  await execa('git', commitArgs);
-
-  spinner.succeed();
 };
 
 const generateChangelog = async () => {
@@ -111,7 +86,7 @@ const run = async () => {
   console.log(chalk.blue(figlet.textSync('release')));
   try {
     await assertGitBranch(ALLOWED_RELEASE_BRANCHES, spinner);
-    await versionPackages();
+    await printCommits();
     await generateChangelog();
     spinner.succeed(
       'Success\n✨ Push this branch and create a new pull request.'
