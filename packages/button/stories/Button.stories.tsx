@@ -3,7 +3,7 @@ import { Button } from '../src';
 
 export default {
   component: Button,
-  title: 'Design System/Button',
+  title: 'Components/Button',
 };
 
 export const primary = () => <Button>{'Button'}</Button>;
