@@ -11,6 +11,19 @@
 <!-- DO NOT MODIFY BELOW THIS COMMENT -->
 <!-- insert-new-changelog-here -->
 
+## Release (2021-03-14)
+
+#### :rocket: New Feature
+* `layout`
+  * [#31](https://github.com/DanielSepulveda/lean-ui/pull/31) Create layout components ([@DanielSepulveda](https://github.com/DanielSepulveda))
+
+#### :house: Internal
+* `button`, `input`
+  * [#32](https://github.com/DanielSepulveda/lean-ui/pull/32) refactor(testing): refactor testing configuration and add test script… ([@DanielSepulveda](https://github.com/DanielSepulveda))
+
+#### Committers: 1
+- Daniel Sepulveda ([@DanielSepulveda](https://github.com/DanielSepulveda))
+
 ## Release (2021-03-02)
 
 #### :bug: Bug Fix
