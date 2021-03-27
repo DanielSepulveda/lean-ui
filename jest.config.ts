@@ -15,6 +15,7 @@ const config: Config.InitialOptions = {
     '!/packages/.template',
     '!**/node_modules/**',
   ],
+  modulePathIgnorePatterns: ['./node_modules'],
   // Run some code to configure or set up the testing framework before each test file in the suite is executed.
   setupFilesAfterEnv: ['<rootDir>/utils/test/setupTests.ts'],
   // A list of reporter names that Jest uses when writing coverage reports.
